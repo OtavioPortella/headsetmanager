@@ -1,14 +1,8 @@
-import Header from "./components/header";
-import Login from "./pages/login";
 import "./index.css";
+import Routes from "./routes";
 
 function App() {
-  return (
-    <div className="min-h-screen w-screen flex flex-col">
-      <Header />
-      <Login />
-    </div>
-  );
+  return <Routes />;
 }
 
 export default App;
