@@ -7,7 +7,14 @@ function Header() {
         <div className="flex justify-center h-8">
           <img src="../src/assets/toledo.png" alt="" />
         </div>
-        <Button>Login</Button>
+        <div>
+          <Button>
+            <a href="./teste1">Teste1</a>
+          </Button>
+          <Button>
+            <a href="./teste2">Teste2</a>
+          </Button>
+        </div>
       </div>
     </header>
   );
