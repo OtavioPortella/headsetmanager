@@ -1,5 +1,4 @@
-//import LoginPage from "./LoginPage";
-import Button from "./button";
+import Button from "../components/button";
 
 function Login() {
   return (
