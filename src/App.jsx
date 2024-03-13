@@ -1,12 +1,12 @@
-import Header from "./components/header";
-import Page from "./components/page";
 import "./index.css";
+import MyRoutes from "./routes";
+import Header from "./components/header";
 
 function App() {
   return (
     <div className="min-h-screen w-screen flex flex-col">
       <Header />
-      <Page />
+      <MyRoutes />
     </div>
   );
 }

@@ -1,11 +1,14 @@
-import Button from "./button";
+import Button from "../components/button";
 
-function Page() {
+function Teste1() {
   return (
     <div className="flex-1 flex justify-center pt-4 pb-4  w-full bg-hero-pattern bg-cover bg-no-repeat">
       <div className="rounded-lg flex flex-col bg-white/35 shadow-2xl">
         <h1 className="font-serif pt-8 text-azul-toledo text-center text-[46px]">
-          Login
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+          delectus rerum, repudiandae distinctio consectetur sint voluptatibus
+          ex reprehenderit blanditiis dolorum a? Quaerat exercitationem repellat
+          placeat facere, repudiandae earum minima accusamus.
         </h1>
         <div className="flex-1 flex justify-between">
           <div className=" flex-1 flex flex-col justify-center items-center gap-4">
@@ -28,4 +31,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Teste1;
