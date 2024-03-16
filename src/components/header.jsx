@@ -18,7 +18,7 @@ function Header() {
             <a href="./send">Enviados</a>
           </Button>
           <Button>
-            <a href="./dashboard">Dashboard</a>
+            <a href="./dashboard">Relatórios</a>
           </Button>
         </div>
       </div>

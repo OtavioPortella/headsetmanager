@@ -14,7 +14,7 @@ function Enviados() {
             </h1>
             <div className="flex flex-col p-12 gap-6 text-lg ">
               <div className="flex items-center justify-between gap-2 ">
-                <h1>Data de Enviados:</h1>
+                <h1>Data de Envio:</h1>
                 <input
                   className="bg-blue-200 border border-azul-toledo rounded-md outline-none p-1 placeholder:text-azul-toledo"
                   type="date"
