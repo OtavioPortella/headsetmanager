@@ -20,6 +20,9 @@ function Header() {
           <Button>
             <a href="./dashboard">Relatórios</a>
           </Button>
+          <Button>
+            <a href="./delivered">Entrega de Heads</a>
+          </Button>
         </div>
       </div>
     </header>
