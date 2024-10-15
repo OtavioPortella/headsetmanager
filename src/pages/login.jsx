@@ -1,11 +1,14 @@
 import Button from "../components/button";
 import Header from "../components/header";
 import Background from "../components/background";
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { http } from "../services/http";
+import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
+
+  const { login, signed } = useAuth();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -15,21 +18,25 @@ function Login() {
     const matricula = form.get('matricula')
     const senha = form.get('senha');
   
-    const response = await axios.post('http://localhost:3000/login', {
+    const response = await http.post('/login', {
       matricula,
       senha
     });
 
     const { user, token } = response.data;
 
-
     console.log({
       user,
       token
     });
 
+    login(token);
     navigate('/dashboard')
-    
+  }
+
+
+  if (signed) {
+    return <Navigate to="/dashboard" />
   }
 
   return (

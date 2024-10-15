@@ -1,10 +1,13 @@
+import { AuthProvider } from "./contexts/AuthContext";
 import "./index.css";
 import MyRoutes from "./routes";
 
 function App() {
   return (
     <div className="min-h-screen w-screen flex flex-col">
-      <MyRoutes />
+      <AuthProvider>
+        <MyRoutes />
+      </AuthProvider>
     </div>
   );
 }
