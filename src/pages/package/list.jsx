@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "../../components/button";
 import Title from "../../components/Title";
 import Container from "../../components/Container";
 import { http } from "../../services/http";
 
 function Recebidos() {
+  const queryClient = useQueryClient();
+
   const { data: packages } = useQuery({
     queryKey: ["packages"],
     queryFn: async () => {
@@ -14,6 +16,23 @@ function Recebidos() {
       return response.data;
     },
   });
+
+  const { mutate: deletePackage } = useMutation({
+    mutationFn: async (id) => {
+      await http.delete(`/malote/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["packages"] });
+    },
+  });
+
+  function handleDeletePackage(id) {
+    if (!confirm("Tem certeza que deseja excluir este malote?")) {
+      return;
+    }
+
+    deletePackage(id);
+  }
 
   return (
     <Container>
@@ -50,7 +69,9 @@ function Recebidos() {
                   <Link to={`/packages/edit/${p.id}`} state={{ package: p }}>
                     <Button>Editar</Button>
                   </Link>
-                  <Button>Excluir</Button>
+                  <Button onClick={() => handleDeletePackage(p.id)}>
+                    Excluir
+                  </Button>
                 </td>
               </tr>
             ))}
