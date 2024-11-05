@@ -21,14 +21,8 @@ function Header() {
               <Link to="/packages">
                 <Button>Malotes</Button>
               </Link>
-              <Link to="/send">
-                <Button>Enviados</Button>
-              </Link>
-              <Link to="/dashboard">
-                <Button>Relatórios</Button>
-              </Link>
-              <Link to="/delivered">
-                <Button>Entrega de Heads</Button>
+              <Link to="/sections">
+                <Button>Carteiras</Button>
               </Link>
               <Button
                 onClick={() => {

@@ -5,7 +5,7 @@ import Title from "../../components/Title";
 import Container from "../../components/Container";
 import { http } from "../../services/http";
 
-function Recebidos() {
+function Packages() {
   const queryClient = useQueryClient();
 
   const { data: packages } = useQuery({
@@ -82,4 +82,4 @@ function Recebidos() {
   );
 }
 
-export default Recebidos;
+export default Packages;

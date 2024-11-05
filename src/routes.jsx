@@ -2,13 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import PackageList from "./pages/package/list";
 import NewPackage from "./pages/package/new";
-import Enviados from "./pages/sends";
-import Dashboard from "./pages/dashboard";
-import Delivered from "./pages/delivered";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Header from "./components/header";
 import Background from "./components/background";
 import EditPackage from "./pages/package/edit";
+import Sections from "./pages/sections/list";
+import CreateSection from "./pages/sections/create";
 
 function MyRoutes() {
   return (
@@ -42,26 +41,18 @@ function MyRoutes() {
             }
           />
           <Route
-            path="/send"
+            path="/sections"
             element={
               <ProtectedRoute>
-                <Enviados />
+                <Sections />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/dashboard"
+            path="/sections/new"
             element={
               <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/delivered"
-            element={
-              <ProtectedRoute>
-                <Delivered />
+                <CreateSection />
               </ProtectedRoute>
             }
           />
