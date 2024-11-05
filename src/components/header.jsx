@@ -7,6 +7,8 @@ function Header() {
 
   const { signed, logout } = useAuth();
 
+  if (!signed) return null;
+
   return (
     <header className="bg-azul-toledo text-white h-16">
       <div className="flex justify-between p-4">
@@ -16,8 +18,8 @@ function Header() {
         <div>
           {signed && (
             <>
-              <Link to="/received">
-                <Button>Recebidos</Button>
+              <Link to="/packages">
+                <Button>Malotes</Button>
               </Link>
               <Link to="/send">
                 <Button>Enviados</Button>

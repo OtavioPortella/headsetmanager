@@ -1,16 +1,16 @@
 import { createContext, useContext, useState } from "react";
 import { http } from "../services/http";
 
-const AuthContext = createContext({})
+const AuthContext = createContext({});
 
-const TOKEN_NAME = '@headset-manager/token'
+export const TOKEN_NAME = "@headset-manager/token";
 
 export function AuthProvider({ children }) {
   const [signed, setSigned] = useState(() => {
     const token = localStorage.getItem(TOKEN_NAME);
 
     if (token) {
-      http.defaults.headers.common.Authorization = `Bearer ${token}`
+      http.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
 
     return !!token;
@@ -21,25 +21,27 @@ export function AuthProvider({ children }) {
     setSigned(false);
   }
   function login(token) {
-    localStorage.setItem('@headset-manager/token', token);
-    http.defaults.headers.common.Authorization = `Bearer ${token}`
-    setSigned(true)
+    localStorage.setItem("@headset-manager/token", token);
+    http.defaults.headers.common.Authorization = `Bearer ${token}`;
+    setSigned(true);
   }
 
   return (
-    <AuthContext.Provider value={{
-      signed,
-      setSigned,
-      logout,
-      login
-    }}>
+    <AuthContext.Provider
+      value={{
+        signed,
+        setSigned,
+        logout,
+        login,
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export function useAuth() {
   const ctx = useContext(AuthContext);
 
-  return ctx
+  return ctx;
 }
