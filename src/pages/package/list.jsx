@@ -47,7 +47,9 @@ function Recebidos() {
                   {p.recebidoEm ? p.recebidoEm : "Não recebido"}
                 </td>
                 <td className="p-2 flex gap-2">
-                  <Button>Editar</Button>
+                  <Link to={`/packages/edit/${p.id}`} state={{ package: p }}>
+                    <Button>Editar</Button>
+                  </Link>
                   <Button>Excluir</Button>
                 </td>
               </tr>

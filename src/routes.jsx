@@ -8,6 +8,7 @@ import Delivered from "./pages/delivered";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Header from "./components/header";
 import Background from "./components/background";
+import EditPackage from "./pages/package/edit";
 
 function MyRoutes() {
   return (
@@ -21,6 +22,14 @@ function MyRoutes() {
             element={
               <ProtectedRoute>
                 <PackageList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/packages/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditPackage />
               </ProtectedRoute>
             }
           />
