@@ -8,6 +8,8 @@ import Background from "./components/background";
 import EditPackage from "./pages/package/edit";
 import Sections from "./pages/sections/list";
 import CreateSection from "./pages/sections/create";
+import CreateUser from "./pages/users/create";
+import Users from "./pages/users/list";
 
 function MyRoutes() {
   return (
@@ -53,6 +55,22 @@ function MyRoutes() {
             element={
               <ProtectedRoute>
                 <CreateSection />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users/new"
+            element={
+              <ProtectedRoute>
+                <CreateUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <Users />
               </ProtectedRoute>
             }
           />

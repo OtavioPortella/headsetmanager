@@ -15,26 +15,27 @@ function Header() {
         <div className="flex justify-center h-8">
           <img src="../src/assets/toledo.png" alt="" />
         </div>
-        <div>
-          {signed && (
-            <>
-              <Link to="/packages">
-                <Button>Malotes</Button>
-              </Link>
-              <Link to="/sections">
-                <Button>Carteiras</Button>
-              </Link>
-              <Button
-                onClick={() => {
-                  logout();
-                  navigate("/");
-                }}
-              >
-                Sair
-              </Button>
-            </>
-          )}
-        </div>
+        {signed && (
+          <div>
+            <Link to="/packages">
+              <Button>Malotes</Button>
+            </Link>
+            <Link to="/sections">
+              <Button>Carteiras</Button>
+            </Link>
+            <Link to="/users">
+              <Button>Usuários</Button>
+            </Link>
+            <Button
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+            >
+              Sair
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );

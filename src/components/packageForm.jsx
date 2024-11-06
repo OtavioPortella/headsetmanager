@@ -124,7 +124,7 @@ export function PackageForm({ onSubmit, defaultValues }) {
         <input type="checkbox" {...register("garantia")} />
       </label>
 
-      <Button type="submit">Registrar</Button>
+      <Button type="submit">Confirmar</Button>
     </form>
   );
 }
