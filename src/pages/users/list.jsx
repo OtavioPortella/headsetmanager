@@ -5,9 +5,12 @@ import Title from "../../components/Title";
 import Container from "../../components/Container";
 import { http } from "../../services/http";
 import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Users() {
   const queryClient = useQueryClient();
+
+  const { user } = useAuth();
 
   const { data: filials = [] } = useQuery({
     queryKey: ["filials"],
@@ -54,9 +57,11 @@ function Users() {
     <Container>
       <div className="flex justify-between items-center">
         <Title>Usuários</Title>
-        <Link to="/users/new">
-          <Button>Novo Usuário</Button>
-        </Link>
+        {user?.perfil?.podeCriarUsuario && (
+          <Link to="/users/new">
+            <Button>Novo Usuário</Button>
+          </Link>
+        )}
       </div>
 
       <div className="my-4">

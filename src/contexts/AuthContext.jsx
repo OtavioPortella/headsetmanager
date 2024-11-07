@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
     queryKey: ["user"],
     queryFn: async () => {
       const response = await http.get("/user/me");
-      return response.data;
+      return response.data.user;
     },
     enabled: signed,
   });
