@@ -10,6 +10,9 @@ import Sections from "./pages/sections/list";
 import CreateSection from "./pages/sections/create";
 import CreateUser from "./pages/users/create";
 import Users from "./pages/users/list";
+import Companies from "./pages/companies/list";
+import NewCompany from "./pages/companies/new";
+import EditCompany from "./pages/companies/edit";
 
 function MyRoutes() {
   return (
@@ -71,6 +74,30 @@ function MyRoutes() {
             element={
               <ProtectedRoute>
                 <Users />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/companies"
+            element={
+              <ProtectedRoute>
+                <Companies />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/companies/new"
+            element={
+              <ProtectedRoute>
+                <NewCompany />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/companies/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditCompany />
               </ProtectedRoute>
             }
           />

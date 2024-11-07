@@ -21,12 +21,7 @@ function Login() {
       senha,
     });
 
-    const { user, token } = response.data;
-
-    console.log({
-      user,
-      token,
-    });
+    const { token } = response.data;
 
     login(token);
     navigate("/dashboard");
