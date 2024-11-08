@@ -49,6 +49,7 @@ function OrdersList() {
               <th className="p-2 text-left">Quantidade Simples</th>
               <th className="p-2 text-left">Motivo</th>
               <th className="p-2 text-left">Matrículas</th>
+              <th className="p-2 text-left">Status</th>
               <th className="p-2 text-left">Ações</th>
             </tr>
           </thead>
@@ -58,6 +59,7 @@ function OrdersList() {
                 <td className="p-2">{order.qtdSimples}</td>
                 <td className="p-2">{order.motivo}</td>
                 <td className="p-2">{order.matriculas.join(", ")}</td>
+                <td className="p-2">{order.status}</td>
                 <td className="p-2 flex gap-2">
                   <Button onClick={() => handleDeleteOrder(order.id)}>
                     Excluir

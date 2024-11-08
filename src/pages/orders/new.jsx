@@ -10,15 +10,26 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { http } from "../../services/http";
 import { useNavigate } from "react-router-dom";
 
-const createOrderSchema = z.object({
-  qtdSimples: z.number().min(1, "Quantidade deve ser maior que 0"),
-  matriculas: z
-    .array(z.string().min(1, "Matrícula é obrigatória"))
-    .min(1, "Informe ao menos uma matrícula"),
-  motivo: z.enum(["NOVATO", "TROCA"], {
-    required_error: "Selecione um motivo",
-  }),
-});
+const createOrderSchema = z
+  .object({
+    qtdSimples: z.number().min(1, "Quantidade deve ser maior que 0"),
+    matriculas: z
+      .array(z.string().min(1, "Matrícula é obrigatória"))
+      .min(1, "Informe ao menos uma matrícula"),
+    motivo: z.enum(["NOVATO", "TROCA"], {
+      required_error: "Selecione um motivo",
+    }),
+  })
+  .superRefine((data, ctx) => {
+    if (data.qtdSimples !== data.matriculas.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["qtdSimples"],
+        message:
+          "A quantidade de simples deve ser igual a quantidade de matrículas",
+      });
+    }
+  });
 
 function CreateOrder() {
   const queryClient = useQueryClient();
@@ -54,7 +65,12 @@ function CreateOrder() {
 
   const motivosOptions = [
     { label: "NOVATO", value: "NOVATO" },
-    { label: "TROCA", value: "TROCA" },
+    { label: "MAL CONTATO", value: "MAL_CONTATO" },
+    { label: "MICROFONE MUDO", value: "MICROFONE_MUDO" },
+    { label: "ALTO FALANTE MUDO", value: "ALTO_FALANTE_MUDO" },
+    { label: "ARCO QUEBRADO", value: "ARCO_QUEBRADO" },
+    { label: "RUIDO", value: "RUIDO" },
+    { label: "OUTROS", value: "OUTROS" },
   ];
 
   return (
@@ -71,6 +87,7 @@ function CreateOrder() {
           label="Quantidade simples"
           error={errors.qtdSimples?.message}
           {...register("qtdSimples", { valueAsNumber: true })}
+          type="number"
         />
 
         <Controller
