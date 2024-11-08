@@ -57,6 +57,9 @@ function Header() {
             <Link to="/companies">
               <Button>Filiais</Button>
             </Link>
+            <Link to="/orders">
+              <Button>Pedidos</Button>
+            </Link>
             <Button
               onClick={() => {
                 logout();

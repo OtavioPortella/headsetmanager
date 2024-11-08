@@ -13,6 +13,8 @@ import Users from "./pages/users/list";
 import Companies from "./pages/companies/list";
 import NewCompany from "./pages/companies/new";
 import EditCompany from "./pages/companies/edit";
+import OrdersList from "./pages/orders/list";
+import NewOrder from "./pages/orders/new";
 
 function MyRoutes() {
   return (
@@ -98,6 +100,22 @@ function MyRoutes() {
             element={
               <ProtectedRoute>
                 <EditCompany />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <OrdersList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders/new"
+            element={
+              <ProtectedRoute>
+                <NewOrder />
               </ProtectedRoute>
             }
           />
