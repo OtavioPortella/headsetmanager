@@ -1,0 +1,7 @@
+Always use react-hook-form and zod to handle forms.
+
+Always use tailwindcss to style the components.
+
+Prefer use the components created inside the src/components folder.
+
+Implement the same appearance for all pages, following the same color palette and structure in tables, forms, etc.

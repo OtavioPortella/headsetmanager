@@ -15,7 +15,7 @@ import NewCompany from "./pages/companies/new";
 import EditCompany from "./pages/companies/edit";
 import OrdersList from "./pages/orders/list";
 import NewOrder from "./pages/orders/new";
-
+import Dashboard from "./pages/dashboard";
 function MyRoutes() {
   return (
     <BrowserRouter>
@@ -116,6 +116,14 @@ function MyRoutes() {
             element={
               <ProtectedRoute>
                 <NewOrder />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
               </ProtectedRoute>
             }
           />
