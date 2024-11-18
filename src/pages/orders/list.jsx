@@ -4,6 +4,7 @@ import Button from "../../components/button";
 import Title from "../../components/Title";
 import Container from "../../components/Container";
 import { http } from "../../services/http";
+import { ORDER_STATUS } from "../../constants";
 
 function OrdersList() {
   const queryClient = useQueryClient();
@@ -25,12 +26,65 @@ function OrdersList() {
     },
   });
 
+  const { mutate: changeOrderStatus } = useMutation({
+    mutationFn: async ({ id, status }) => {
+      await http.put(`/pedido/${id}`, {
+        status,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
+
   function handleDeleteOrder(id) {
     if (!confirm("Tem certeza que deseja excluir este pedido?")) {
       return;
     }
 
     deleteOrder(id);
+  }
+
+  function getOrderActions(order) {
+    const { status, id } = order;
+    switch (status) {
+      case ORDER_STATUS.NOVO:
+        return [
+          {
+            label: "Iniciar",
+            onClick: () =>
+              changeOrderStatus({
+                id,
+                status: ORDER_STATUS.EM_ATENDIMENTO,
+              }),
+          },
+        ];
+      case ORDER_STATUS.PENDENTE:
+        return [
+          {
+            label: "Iniciar",
+            onClick: () =>
+              changeOrderStatus({
+                id,
+                status: ORDER_STATUS.EM_ATENDIMENTO,
+              }),
+          },
+        ];
+      case ORDER_STATUS.EM_ATENDIMENTO:
+        return [
+          {
+            label: "Finalizar",
+            onClick: () =>
+              changeOrderStatus({
+                id,
+                status: ORDER_STATUS.FINALIZADO,
+              }),
+          },
+        ];
+
+      default:
+        return [];
+    }
   }
 
   return (
@@ -61,9 +115,16 @@ function OrdersList() {
                 <td className="p-2">{order.matriculas.join(", ")}</td>
                 <td className="p-2">{order.status}</td>
                 <td className="p-2 flex gap-2">
-                  <Button onClick={() => handleDeleteOrder(order.id)}>
-                    Excluir
-                  </Button>
+                  {getOrderActions(order).map((action) => (
+                    <Button onClick={action.onClick} key={action.label}>
+                      {action.label}
+                    </Button>
+                  ))}
+                  {order.status !== ORDER_STATUS.FINALIZADO && (
+                    <Button onClick={() => handleDeleteOrder(order.id)}>
+                      Cancelar
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}

@@ -16,9 +16,20 @@ const createOrderSchema = z
     matriculas: z
       .array(z.string().min(1, "Matrícula é obrigatória"))
       .min(1, "Informe ao menos uma matrícula"),
-    motivo: z.enum(["NOVATO", "TROCA"], {
-      required_error: "Selecione um motivo",
-    }),
+    motivo: z.enum(
+      [
+        "NOVATO",
+        "MAL_CONTATO",
+        "MICROFONE_MUDO",
+        "ALTO_FALANTE_MUDO",
+        "ARCO_QUEBRADO",
+        "RUIDO",
+        "OUTROS",
+      ],
+      {
+        required_error: "Selecione um motivo",
+      },
+    ),
   })
   .superRefine((data, ctx) => {
     if (data.qtdSimples !== data.matriculas.length) {
