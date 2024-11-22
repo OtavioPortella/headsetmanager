@@ -43,7 +43,7 @@ function Packages() {
         </Link>
       </div>
 
-      <div>
+      <div className="mt-4">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-100">
@@ -69,7 +69,10 @@ function Packages() {
                   <Link to={`/packages/edit/${p.id}`} state={{ package: p }}>
                     <Button>Editar</Button>
                   </Link>
-                  <Button onClick={() => handleDeletePackage(p.id)}>
+                  <Button
+                    onClick={() => handleDeletePackage(p.id)}
+                    color="danger"
+                  >
                     Excluir
                   </Button>
                 </td>

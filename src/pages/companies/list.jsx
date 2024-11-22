@@ -67,7 +67,10 @@ function Companies() {
                   >
                     <Button>Editar</Button>
                   </Link>
-                  <Button onClick={() => handleDeleteCompany(company.id)}>
+                  <Button
+                    onClick={() => handleDeleteCompany(company.id)}
+                    color="danger"
+                  >
                     Excluir
                   </Button>
                 </td>

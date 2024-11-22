@@ -111,7 +111,7 @@ function OrdersList() {
             {orders?.map((order) => (
               <tr className="border-b" key={String(order.id)}>
                 <td className="p-2">{order.qtdSimples}</td>
-                <td className="p-2">{order.motivo}</td>
+                <td className="p-2">{order.motivo.replaceAll("_", " ")}</td>
                 <td className="p-2">{order.matriculas.join(", ")}</td>
                 <td className="p-2">{order.status}</td>
                 <td className="p-2 flex gap-2">
@@ -121,7 +121,10 @@ function OrdersList() {
                     </Button>
                   ))}
                   {order.status !== ORDER_STATUS.FINALIZADO && (
-                    <Button onClick={() => handleDeleteOrder(order.id)}>
+                    <Button
+                      onClick={() => handleDeleteOrder(order.id)}
+                      color="danger"
+                    >
                       Cancelar
                     </Button>
                   )}

@@ -66,7 +66,7 @@ export function UserRequestsChart() {
   return (
     <div>
       <h2 className="text-xl font-bold text-azul-toledo">
-        Comparativo de Estoque
+        Quantidade de pedidos
       </h2>
       <Bar data={chartData} options={options} />
     </div>

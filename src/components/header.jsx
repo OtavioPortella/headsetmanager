@@ -7,11 +7,15 @@ function Header() {
 
   const { signed, logout, user } = useAuth();
 
+  console.log(user);
+
   if (!signed) return null;
+
+  console.log(user);
 
   return (
     <header className="bg-azul-toledo text-white h-16">
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between p-4 container mx-auto">
         <div className="flex items-center gap-2">
           <svg
             viewBox="0 0 16 16"
@@ -40,22 +44,27 @@ function Header() {
             </g>
           </svg>
           <span className="text-white font-semibold text-xl">
-            {user?.nome} - {user?.perfil?.nome}
+            {user?.nome} - {user?.carteira?.nome} -{" "}
+            {user?.carteira?.filial?.nome}
           </span>
         </div>
         {signed && (
           <div>
-            <Link to="/packages">
-              <Button>Malotes</Button>
-            </Link>
-            <Link to="/sections">
-              <Button>Carteiras</Button>
-            </Link>
+            {user?.perfil?.admin && (
+              <>
+                <Link to="/packages">
+                  <Button>Malotes</Button>
+                </Link>
+                <Link to="/sections">
+                  <Button>Carteiras</Button>
+                </Link>
+                <Link to="/companies">
+                  <Button>Filiais</Button>
+                </Link>
+              </>
+            )}
             <Link to="/users">
               <Button>Usuários</Button>
-            </Link>
-            <Link to="/companies">
-              <Button>Filiais</Button>
             </Link>
             <Link to="/orders">
               <Button>Pedidos</Button>

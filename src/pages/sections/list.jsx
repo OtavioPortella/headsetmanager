@@ -91,7 +91,10 @@ function Section() {
                 <td className="p-2">{section.filial?.nome}</td>
                 <td className="p-2">
                   <div className="flex gap-2">
-                    <Button onClick={() => handleDeleteSection(section.id)}>
+                    <Button
+                      onClick={() => handleDeleteSection(section.id)}
+                      color="danger"
+                    >
                       Excluir
                     </Button>
                   </div>

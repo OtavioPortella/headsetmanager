@@ -51,9 +51,12 @@ function CreateOrder() {
     handleSubmit,
     formState: { errors },
     control,
+    watch,
   } = useForm({
     resolver: zodResolver(createOrderSchema),
   });
+
+  const motivo = watch("motivo");
 
   const {
     fields: matriculas,
@@ -142,6 +145,14 @@ function CreateOrder() {
           <span className="text-red-500 font-semibold mt-2">
             {errors.matriculas.message}
           </span>
+        )}
+
+        {motivo === "NOVATO" && (
+          <a href="/termo-de-responsabilidade.pdf" download className="w-full">
+            <Button type="button" color="success" className="w-full">
+              Baixar termo de responsabilidade
+            </Button>
+          </a>
         )}
 
         <Button type="submit">Criar Pedido</Button>

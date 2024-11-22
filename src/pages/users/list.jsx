@@ -64,21 +64,23 @@ function Users() {
         )}
       </div>
 
-      <div className="my-4">
-        <select
-          className="p-2 border rounded"
-          onChange={(e) => setSelectedFilialId(e.target.value || null)}
-        >
-          <option value="">Todas as filiais</option>
-          {filials.map((filial) => (
-            <option key={filial.id} value={filial.id}>
-              {filial.nome}
-            </option>
-          ))}
-        </select>
-      </div>
+      {user?.perfil?.admin && (
+        <div className="mt-4">
+          <select
+            className="p-2 border rounded"
+            onChange={(e) => setSelectedFilialId(e.target.value || null)}
+          >
+            <option value="">Todas as filiais</option>
+            {filials.map((filial) => (
+              <option key={filial.id} value={filial.id}>
+                {filial.nome}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
-      <div>
+      <div className="mt-4">
         <table className="w-full">
           <thead>
             <tr className="bg-gray-100">
@@ -92,20 +94,23 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id} className="border-b">
-                <td className="p-2">{user.id}</td>
-                <td className="p-2">{user.nome}</td>
-                <td className="p-2">{user.matricula}</td>
-                <td className="p-2">{user.carteira?.nome}</td>
-                <td className="p-2">{user?.carteira?.filial?.nome}</td>
-                <td className="p-2">{user.perfil?.nome}</td>
+            {users.map((employee) => (
+              <tr key={employee.id} className="border-b">
+                <td className="p-2">{employee.id}</td>
+                <td className="p-2">{employee.nome}</td>
+                <td className="p-2">{employee.matricula}</td>
+                <td className="p-2">{employee.carteira?.nome}</td>
+                <td className="p-2">{employee?.carteira?.filial?.nome}</td>
+                <td className="p-2">{employee.perfil?.nome}</td>
                 <td className="p-2">
-                  <div className="flex gap-2">
-                    <Button onClick={() => handleDeleteUser(user.id)}>
+                  {user?.perfil?.admin && (
+                    <Button
+                      onClick={() => handleDeleteUser(user.id)}
+                      color="danger"
+                    >
                       Excluir
                     </Button>
-                  </div>
+                  )}
                 </td>
               </tr>
             ))}
