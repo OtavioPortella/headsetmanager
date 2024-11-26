@@ -2,11 +2,29 @@ import Button from "../components/button";
 import { Navigate, useNavigate } from "react-router-dom";
 import { http } from "../services/http";
 import { useAuth } from "../contexts/AuthContext";
+import { useMutation } from "@tanstack/react-query";
 
 function Login() {
   const navigate = useNavigate();
 
   const { login, signed } = useAuth();
+
+  const { mutate: authenticate } = useMutation({
+    mutationFn: async ({ matricula, senha }) => {
+      const response = await http.post("/login", {
+        matricula,
+        senha,
+      });
+
+      const { token } = response.data;
+
+      return token;
+    },
+    onSuccess: (token) => {
+      login(token);
+      navigate("/dashboard");
+    },
+  });
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -16,15 +34,10 @@ function Login() {
     const matricula = form.get("matricula");
     const senha = form.get("senha");
 
-    const response = await http.post("/login", {
+    authenticate({
       matricula,
       senha,
     });
-
-    const { token } = response.data;
-
-    login(token);
-    navigate("/dashboard");
   }
 
   if (signed) {
