@@ -105,7 +105,7 @@ function Users() {
                 <td className="p-2">
                   {user?.perfil?.admin && (
                     <Button
-                      onClick={() => handleDeleteUser(user.id)}
+                      onClick={() => handleDeleteUser(employee.id)}
                       color="danger"
                     >
                       Excluir
