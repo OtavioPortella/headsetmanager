@@ -1,8 +1,10 @@
 import Button from "../components/button";
+import Input from "../components/Input";
 import { Navigate, useNavigate } from "react-router-dom";
 import { http } from "../services/http";
 import { useAuth } from "../contexts/AuthContext";
 import { useMutation } from "@tanstack/react-query";
+import Container from "../components/Container";
 
 function Login() {
   const navigate = useNavigate();
@@ -45,33 +47,17 @@ function Login() {
   }
 
   return (
-    <form
-      className="rounded-lg flex flex-col bg-white/35 shadow-2xl"
-      onSubmit={handleSubmit}
-    >
-      <h1 className="font-serif pt-8 text-azul-toledo text-center text-[46px]">
-        Login
-      </h1>
-      <div className="flex-1 flex justify-between">
-        <div className="flex-1 flex flex-col items-center justify-center gap-2 p-4">
-          <h1>Selecione a sua Filial:</h1>
-          <input
-            className="bg-blue-200 border border-azul-toledo rounded-md outline-none p-1 placeholder:text-azul-toledo"
-            type="text"
-            placeholder="Matrícula"
-            name="matricula"
-          />
-          <input
-            className="bg-blue-200 border border-azul-toledo rounded-md outline-none p-1 placeholder:text-azul-toledo"
-            type="password"
-            placeholder="Senha"
-            name="senha"
-          />
-          <Button type="submit">Entrar</Button>
-        </div>
-        <div className="flex-1 w-[700px] bg-forgot-password bg-contain bg-no-repeat" />
-      </div>
-    </form>
+    <Container className="max-w-md shadow px-8">
+      <form
+        className="flex-1 justify-center flex flex-col gap-3"
+        onSubmit={handleSubmit}
+      >
+        <h1 className="text-azul-toledo text-center text-[46px]">Login</h1>
+        <Input placeholder="Matrícula" name="matricula" />
+        <Input type="password" placeholder="Senha" name="senha" />
+        <Button type="submit">Entrar</Button>
+      </form>
+    </Container>
   );
 }
 
