@@ -52,6 +52,9 @@ function Header() {
           <div>
             {user?.perfil?.admin && (
               <>
+                <Link to="/dashboard">
+                  <Button>Dashboard</Button>
+                </Link>
                 <Link to="/packages">
                   <Button>Malotes</Button>
                 </Link>

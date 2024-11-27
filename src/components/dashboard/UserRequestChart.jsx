@@ -18,27 +18,13 @@ ChartJS.register(
   Legend,
 );
 
-// Dados mockados
-const mockData = {
-  MAT123456: 15,
-  MAT789012: 12,
-  MAT345678: 10,
-  MAT901234: 8,
-  MAT567890: 7,
-  MAT234567: 6,
-  MAT890123: 5,
-  MAT456789: 4,
-  MAT012345: 3,
-  MAT678901: 2,
-};
-
-export function UserRequestsChart() {
+export function UserRequestsChart({ filialData }) {
   const chartData = {
-    labels: Object.keys(mockData),
+    labels: filialData.map((filial) => filial.nome),
     datasets: [
       {
         label: "Quantidade de Pedidos",
-        data: Object.values(mockData),
+        data: filialData.map((filial) => filial.totalPedidos),
         backgroundColor: "rgba(59, 130, 246, 0.5)", // Azul do Tailwind
         borderColor: "rgb(59, 130, 246)",
         borderWidth: 1,
@@ -65,10 +51,12 @@ export function UserRequestsChart() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-azul-toledo">
-        Quantidade de pedidos
+      <h2 className="text-xl font-bold text-azul-toledo mb-4">
+        Quantidade de pedidos por filial
       </h2>
-      <Bar data={chartData} options={options} />
+      <div className="h-[300px]">
+        <Bar data={chartData} options={options} />
+      </div>
     </div>
   );
 }

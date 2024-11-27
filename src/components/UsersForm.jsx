@@ -77,6 +77,7 @@ export function UsersForm({ onSubmit, defaultValues }) {
           label="Senha"
           {...register("senha")}
           error={formMethods.formState.errors?.senha?.message}
+          type="password"
         />
       </div>
 

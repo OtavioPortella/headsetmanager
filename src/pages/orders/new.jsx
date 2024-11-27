@@ -128,11 +128,12 @@ function CreateOrder() {
             error={errors.matriculas?.[index]?.message}
           />
         ))}
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2">
           <Button
             type="button"
             onClick={() => removeMatricula(matriculas.length - 1)}
             disabled={matriculas.length === 0}
+            color="danger"
           >
             Remover Matrícula
           </Button>
@@ -155,7 +156,9 @@ function CreateOrder() {
           </a>
         )}
 
-        <Button type="submit">Criar Pedido</Button>
+        <Button color="success" type="submit">
+          Criar Pedido
+        </Button>
       </form>
     </Container>
   );

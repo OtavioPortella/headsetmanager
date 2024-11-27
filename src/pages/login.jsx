@@ -18,13 +18,20 @@ function Login() {
         senha,
       });
 
-      const { token } = response.data;
+      const { token, user } = response.data;
 
-      return token;
+      return {
+        token,
+        user,
+      };
     },
-    onSuccess: (token) => {
+    onSuccess: ({ token, user }) => {
       login(token);
-      navigate("/dashboard");
+      if (user?.perfil?.admin) {
+        navigate("/dashboard");
+      } else {
+        navigate("/orders");
+      }
     },
   });
 

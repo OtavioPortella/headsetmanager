@@ -113,7 +113,7 @@ function OrdersList() {
                 <td className="p-2">{order.qtdSimples}</td>
                 <td className="p-2">{order.motivo.replaceAll("_", " ")}</td>
                 <td className="p-2">{order.matriculas.join(", ")}</td>
-                <td className="p-2">{order.status}</td>
+                <td className="p-2">{order.status.replaceAll("_", " ")}</td>
                 <td className="p-2 flex gap-2">
                   {getOrderActions(order).map((action) => (
                     <Button onClick={action.onClick} key={action.label}>
