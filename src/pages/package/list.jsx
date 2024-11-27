@@ -5,6 +5,7 @@ import Button from "../../components/button";
 import Title from "../../components/Title";
 import Container from "../../components/Container";
 import { http } from "../../services/http";
+import { formatDate } from "../../utils/formatters";
 
 function Packages() {
   const queryClient = useQueryClient();
@@ -72,8 +73,8 @@ function Packages() {
               <td className="p-2">{p.qtdSimples}</td>
               <td className="p-2">{p.qtdDuplo}</td>
               <td className="p-2">{p.garantia ? "Sim" : "Não"}</td>
-              <td className="p-2">{p.createdAt}</td>
-              <td className="p-2">{p.recebidoEm ?? "-"}</td>
+              <td className="p-2">{formatDate(p.createdAt)}</td>
+              <td className="p-2">{formatDate(p.recebidoEm) ?? "-"}</td>
               <td className="p-2 flex gap-2">
                 {isReceivedList ? (
                   <Button
