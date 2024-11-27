@@ -7,7 +7,7 @@ const buttonVariants = tv({
     color: {
       primary: "bg-azul-toledo hover:bg-azul-toledo/90",
       danger: "bg-red-700 hover:bg-red-500 text-white",
-      success: "bg-green-900 hover:bg-green-700",
+      success: "bg-green-700 hover:bg-green-800",
     },
   },
 });
