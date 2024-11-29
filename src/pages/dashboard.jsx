@@ -80,9 +80,14 @@ function Dashboard() {
                 Total de Pedidos:{" "}
                 <span className="font-bold">{filial.totalPedidos}</span>
               </p>
+              {filial.novosPedidos > 0 && (
+                <p className="text-green-500 font-bold mt-2">
+                  {filial.novosPedidos} Pedidos novos!
+                </p>
+              )}
               {filial.pedidosPendentes > 0 && (
                 <p className="text-red-500 font-bold mt-2">
-                  Pedido aguardando início!
+                  {filial.pedidosPendentes} Pedidos aguardando estoque!
                 </p>
               )}
             </div>

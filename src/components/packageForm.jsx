@@ -6,15 +6,25 @@ import { http } from "../services/http";
 import Input from "./Input";
 import Select from "./Select";
 import Button from "./button";
+import { useAuth } from "../contexts/AuthContext";
 
-const newPackageFormScheme = z.object({
-  id: z.number().optional(),
-  qtdSimples: z.coerce.number(),
-  qtdDuplo: z.coerce.number(),
-  garantia: z.boolean(),
-  filialOrigemId: z.number().min(1, "Informe a filial de origem"),
-  filialDestinoId: z.number().min(1, "Informe a filial de destino"),
-});
+const newPackageFormScheme = z
+  .object({
+    id: z.number().optional(),
+    qtdSimples: z.coerce.number(),
+    qtdDuplo: z.coerce.number(),
+    garantia: z.boolean(),
+    filialDestinoId: z.number().min(1, "Informe a filial de destino"),
+  })
+  .superRefine((values, ctx) => {
+    if (values.qtdSimples === 0 && values.qtdDuplo === 0) {
+      ctx.addIssue({
+        message: "O malote deve conter ao menos um head",
+        path: ["qtdSimples"],
+        code: z.ZodIssueCode.custom,
+      });
+    }
+  });
 
 export function PackageForm({ onSubmit, defaultValues }) {
   const { data: filials = [], isPending: isLoadingFilials } = useQuery({
@@ -26,17 +36,20 @@ export function PackageForm({ onSubmit, defaultValues }) {
     },
   });
 
-  const filialsOptions = filials?.map((filial) => ({
-    label: filial.nome,
-    value: filial.id,
-  }));
+  const { user } = useAuth();
+
+  const filialsOptions = filials
+    ?.filter((f) => f.id !== user?.carteira?.filial?.id)
+    ?.map((filial) => ({
+      label: filial.nome,
+      value: filial.id,
+    }));
 
   const { register, ...formMethods } = useForm({
     values: defaultValues ?? {
       qtdSimples: 0,
       qtdDuplo: 0,
       garantia: false,
-      filialOrigemId: 0,
       filialDestinoId: 0,
     },
     resolver: zodResolver(newPackageFormScheme),
@@ -78,32 +91,11 @@ export function PackageForm({ onSubmit, defaultValues }) {
         <div>
           <Controller
             control={formMethods.control}
-            name="filialOrigemId"
-            render={({ field: { onChange, value } }) => (
-              <Select
-                options={filialsOptions}
-                placeholder="Filial de origem"
-                onChange={(option) => {
-                  onChange(option.value);
-                }}
-                value={filialsOptions?.find((v) => v.value === value)}
-              />
-            )}
-          />
-          {errors?.filialOrigemId && (
-            <span className="text-red-500 font-semibold mt-2">
-              {errors?.filialOrigemId?.message}
-            </span>
-          )}
-        </div>
-        <div>
-          <Controller
-            control={formMethods.control}
             name="filialDestinoId"
             render={({ field: { onChange, value } }) => (
               <Select
                 options={filialsOptions}
-                placeholder="Filial de origem"
+                placeholder="Filial de destino"
                 onChange={(option) => {
                   onChange(option.value);
                 }}

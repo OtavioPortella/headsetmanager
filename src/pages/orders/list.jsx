@@ -5,9 +5,12 @@ import Title from "../../components/Title";
 import Container from "../../components/Container";
 import { http } from "../../services/http";
 import { ORDER_STATUS } from "../../constants";
+import { useAuth } from "../../contexts/AuthContext";
 
 function OrdersList() {
   const queryClient = useQueryClient();
+
+  const { user } = useAuth();
 
   const { data: orders } = useQuery({
     queryKey: ["orders"],
@@ -104,7 +107,7 @@ function OrdersList() {
               <th className="p-2 text-left">Motivo</th>
               <th className="p-2 text-left">Matrículas</th>
               <th className="p-2 text-left">Status</th>
-              <th className="p-2 text-left">Ações</th>
+              {user?.perfil?.admin && <th className="p-2 text-left">Ações</th>}
             </tr>
           </thead>
           <tbody>
@@ -114,21 +117,23 @@ function OrdersList() {
                 <td className="p-2">{order.motivo.replaceAll("_", " ")}</td>
                 <td className="p-2">{order.matriculas.join(", ")}</td>
                 <td className="p-2">{order.status.replaceAll("_", " ")}</td>
-                <td className="p-2 flex gap-2">
-                  {getOrderActions(order).map((action) => (
-                    <Button onClick={action.onClick} key={action.label}>
-                      {action.label}
-                    </Button>
-                  ))}
-                  {order.status !== ORDER_STATUS.FINALIZADO && (
-                    <Button
-                      onClick={() => handleDeleteOrder(order.id)}
-                      color="danger"
-                    >
-                      Cancelar
-                    </Button>
-                  )}
-                </td>
+                {user?.perfil?.admin && (
+                  <td className="p-2 flex gap-2">
+                    {getOrderActions(order).map((action) => (
+                      <Button onClick={action.onClick} key={action.label}>
+                        {action.label}
+                      </Button>
+                    ))}
+                    {order.status !== ORDER_STATUS.FINALIZADO && (
+                      <Button
+                        onClick={() => handleDeleteOrder(order.id)}
+                        color="danger"
+                      >
+                        Cancelar
+                      </Button>
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

@@ -59,8 +59,9 @@ function Packages() {
       <table className="w-full">
         <thead>
           <tr className="bg-gray-100">
-            <th className="p-2 text-left">Qtd simples</th>
-            <th className="p-2 text-left">Qtd duplo</th>
+            {!isReceivedList && <th className="p-2 text-left">Destino</th>}
+            <th className="p-2 text-left">Simples</th>
+            <th className="p-2 text-left">Duplo</th>
             <th className="p-2 text-left">Garantia</th>
             <th className="p-2 text-left">Data de criação</th>
             <th className="p-2 text-left">Data de recebimento</th>
@@ -70,13 +71,16 @@ function Packages() {
         <tbody>
           {packages?.map((p) => (
             <tr className="border-b" key={String(p.id)}>
+              {!isReceivedList && (
+                <td className="p-2">{p.filialDestino?.nome}</td>
+              )}
               <td className="p-2">{p.qtdSimples}</td>
               <td className="p-2">{p.qtdDuplo}</td>
               <td className="p-2">{p.garantia ? "Sim" : "Não"}</td>
               <td className="p-2">{formatDate(p.createdAt)}</td>
-              <td className="p-2">{formatDate(p.recebidoEm) ?? "-"}</td>
+              <td className="p-2">{formatDate(p.recebidoEm) || "-"}</td>
               <td className="p-2 flex gap-2">
-                {isReceivedList ? (
+                {isReceivedList && !p?.recebidoEm ? (
                   <Button
                     onClick={() => handleConfirmPackage(p.id)}
                     color="success"
