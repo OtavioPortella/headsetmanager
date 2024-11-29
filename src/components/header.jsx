@@ -55,9 +55,6 @@ function Header() {
                 <Link to="/dashboard">
                   <Button>Dashboard</Button>
                 </Link>
-                <Link to="/packages">
-                  <Button>Malotes</Button>
-                </Link>
                 <Link to="/sections">
                   <Button>Carteiras</Button>
                 </Link>
@@ -66,12 +63,19 @@ function Header() {
                 </Link>
               </>
             )}
+            {user?.perfil?.podeGerenciarMalotes && (
+              <Link to="/packages">
+                <Button>Malotes</Button>
+              </Link>
+            )}
             <Link to="/users">
               <Button>Usuários</Button>
             </Link>
-            <Link to="/orders">
-              <Button>Pedidos</Button>
-            </Link>
+            {user?.perfil?.podeGerenciarPedidos && (
+              <Link to="/orders">
+                <Button>Pedidos</Button>
+              </Link>
+            )}
             <Button
               onClick={() => {
                 logout();
