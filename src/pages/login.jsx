@@ -29,9 +29,13 @@ function Login() {
       login(token);
       if (user?.perfil?.admin) {
         navigate("/dashboard");
-      } else {
-        navigate("/orders");
+        return;
       }
+      if (user?.perfil?.podeGerenciarMalotes) {
+        navigate("/packages");
+        return;
+      }
+      navigate("/orders");
     },
   });
 

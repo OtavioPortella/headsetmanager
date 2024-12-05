@@ -37,7 +37,7 @@ const createOrderSchema = z
         code: z.ZodIssueCode.custom,
         path: ["qtdSimples"],
         message:
-          "A quantidade de simples deve ser igual a quantidade de matrículas",
+          "A quantidade de equipamentos deve ser igual a quantidade de matrículas",
       });
     }
   });
