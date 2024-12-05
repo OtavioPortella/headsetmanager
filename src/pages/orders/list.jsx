@@ -103,6 +103,7 @@ function OrdersList() {
         <table className="w-full">
           <thead>
             <tr className="bg-gray-100">
+              <th className="p-2 text-left">Solicitante</th>
               <th className="p-2 text-left">Quantidade Simples</th>
               <th className="p-2 text-left">Motivo</th>
               <th className="p-2 text-left">Matrículas</th>
@@ -113,6 +114,7 @@ function OrdersList() {
           <tbody>
             {orders?.map((order) => (
               <tr className="border-b" key={String(order.id)}>
+                <td className="p-2">{order.usuario.nome}</td>
                 <td className="p-2">{order.qtdSimples}</td>
                 <td className="p-2">{order.motivo.replaceAll("_", " ")}</td>
                 <td className="p-2">{order.matriculas.join(", ")}</td>
